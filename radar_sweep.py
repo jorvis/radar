@@ -82,6 +82,14 @@ while done==False:
     # Draw the line from the center at 145, 145 to the calculated end spot
     pygame.draw.line(screen, sweep_color, midpoint, [x,y], 1)
 
+    # do the distortion lines
+    pygame.draw.line(screen, [133,147,176], midpoint, [311.3, 587.8], 1)
+    if (angle > 2.3 and angle < 2.8) or (angle > 4.1 and angle < 4.4):
+        pygame.draw.line(screen, [133,147,176], midpoint, [66.2, 468.2], 1)
+    else:
+        pygame.draw.line(screen, [133,147,176], midpoint, [502.4, 504.9], 1)
+        
+
     # now draw the things that layer over the sweep
     inner_circle_radius = int(radius/3)
     pygame.gfxdraw.aacircle(screen, midpoint[0], midpoint[1], inner_circle_radius, inner_border_color)
@@ -90,12 +98,9 @@ while done==False:
     pygame.gfxdraw.aacircle(screen, midpoint[0], midpoint[1], inner_circle_radius - inner_border_width, inner_circle_color)
     pygame.gfxdraw.filled_ellipse(screen, midpoint[0], midpoint[1], inner_circle_radius - inner_border_width, inner_circle_radius - inner_border_width, inner_circle_color)
 
-    # do the distortion lines
-    #if angle > 0 and angle < 280:
-        #pygame.draw.line(screen, sweep_color, midpoint, [sweep_length * ,y], 1)
-    myfont = pygame.font.SysFont("monospace", 12)
-    label = myfont.render("Sweep endpoint: [x:{0:.2f},y:{1:.2f}]".format(x,y), 1, (200,200,200))
-    screen.blit(label, (100, 100))
+    #myfont = pygame.font.SysFont("monospace", 12)
+    #label = myfont.render("Sweep endpoint: [x:{0:.1f},y:{1:.1f}]  Angle: {2:.1f}".format(x,y,angle), 1, (200,200,200))
+    #screen.blit(label, (100, 100))
     
     # Increase the angle by 0.05 radians
     angle = angle + sweep_speed
